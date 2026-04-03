@@ -1,0 +1,7 @@
+dFlask
+Pillow
+Werkzeug
+rembg
+fpdf
+gunicorn
+onnxruntime

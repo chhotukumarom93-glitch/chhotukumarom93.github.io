@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+uploads/
+static/outputs/
+static/previews/
+site_data.db
+.env
