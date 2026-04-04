@@ -1,7 +1,7 @@
-dFlask
+Flask
 Pillow
 Werkzeug
 rembg
-fpdf
+fpdf2
 gunicorn
 onnxruntime
