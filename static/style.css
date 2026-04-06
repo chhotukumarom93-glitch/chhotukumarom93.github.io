@@ -266,19 +266,12 @@ button:hover {
 .middle-ad,
 .bottom-ad {
     text-align: center;
-    padding: 6px;
-    margin: 14px auto;
+    margin: 16px auto;
     width: 100%;
     max-width: 760px;
     min-height: 60px;
-    border-radius: 12px;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
 }
-
 /* Empty ad area ko chhupa do */
 .top-ad:empty,
 .middle-ad:empty,
