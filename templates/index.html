@@ -60,13 +60,20 @@
 
         <!-- Visitor Count -->
         <div class="visitor-box">
-            👁 Unique Visitors: {{ visitor_count }}
+            <p>👁 Unique Visitors: {{ visitor_count }}</p>
+        </div>
+
+        <!-- Features Strip -->
+        <div class="trust-strip">
+            <span>⚡ Fast Processing</span>
+            <span>🔒 Safe Upload</span>
+            <span>📱 Mobile Friendly</span>
+            <span>🛠 Professional Tools</span>
         </div>
 
         <!-- Card -->
         <div class="card">
 
-            <!-- Result Messages -->
             {% if result %}
                 {% if result.success %}
                     <div class="success-box">{{ result.success }}</div>
@@ -76,10 +83,8 @@
                 {% endif %}
             {% endif %}
 
-            <!-- Form -->
             <form method="POST" enctype="multipart/form-data">
 
-                <!-- Tool Select -->
                 <label for="toolSelect">Select Tool</label>
                 <select name="tool" id="toolSelect" onchange="toggleFields()">
                     <option value="compress" {% if selected_tool == "compress" %}selected{% endif %}>Image Compressor</option>
@@ -91,37 +96,31 @@
                     <option value="thumbnail" {% if selected_tool == "thumbnail" %}selected{% endif %}>Thumbnail Tool</option>
                 </select>
 
-                <!-- Single Upload -->
                 <div id="singleImageBox">
                     <label>Upload Image</label>
                     <input type="file" name="image" accept="image/*">
                 </div>
 
-                <!-- Multiple Upload -->
                 <div id="multiImageBox" style="display:none;">
                     <label>Upload Multiple Images (for PDF)</label>
                     <input type="file" name="images" multiple accept="image/*">
                 </div>
 
-                <!-- Target Size -->
                 <div id="targetSizeBox">
                     <label>Target Size (KB)</label>
                     <input type="number" name="target_kb" placeholder="e.g. 100">
                 </div>
 
-                <!-- Width -->
                 <div id="widthBox">
                     <label>Width (optional)</label>
                     <input type="number" name="width" placeholder="e.g. 800">
                 </div>
 
-                <!-- Height -->
                 <div id="heightBox">
                     <label>Height (optional)</label>
                     <input type="number" name="height" placeholder="e.g. 600">
                 </div>
 
-                <!-- Output Format -->
                 <div id="formatBox">
                     <label>Output Format</label>
                     <select name="format">
@@ -134,7 +133,6 @@
                 <button type="submit">🚀 Process Now</button>
             </form>
 
-            <!-- Download -->
             {% if result and result.download_file %}
             <div class="download-section">
                 <a class="download-btn" href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}">
@@ -143,21 +141,12 @@
             </div>
             {% endif %}
 
-            <!-- Preview -->
             {% if result and result.preview_file %}
             <div class="preview-section">
                 <h3>Preview</h3>
                 <img class="preview-img" src="{{ url_for('static', filename=result.preview_folder + '/' + result.preview_file) }}" alt="Preview">
             </div>
             {% endif %}
-        </div>
-
-        <!-- Features Strip -->
-        <div class="trust-strip">
-            <span>⚡ Fast Processing</span>
-            <span>🔒 Safe Upload</span>
-            <span>📱 Mobile Friendly</span>
-            <span>🛠 Professional Tools</span>
         </div>
 
         <!-- Middle Ad -->
@@ -173,23 +162,9 @@
             </script>
         </div>
 
-        <!-- Small Footer Text -->
         <div class="footer">
             © 2026 Photo Tools Pro | Smart Online Editing Tools
         </div>
-    </div>
-
-    <!-- Bottom Ad -->
-    <div class="bottom-ad">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9182040370007762"
-             data-ad-slot="6517689966"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
     </div>
 
     <!-- Footer Links -->
@@ -213,7 +188,6 @@
             let heightBox = document.getElementById("heightBox");
             let formatBox = document.getElementById("formatBox");
 
-            // Default hidden first
             singleImageBox.style.display = "block";
             multiImageBox.style.display = "none";
             targetSizeBox.style.display = "none";
@@ -221,7 +195,6 @@
             heightBox.style.display = "none";
             formatBox.style.display = "block";
 
-            // Compress Tool
             if (tool === "compress") {
                 targetSizeBox.style.display = "block";
                 widthBox.style.display = "block";
@@ -229,19 +202,16 @@
                 formatBox.style.display = "block";
             }
 
-            // PDF Tool
             if (tool === "pdf") {
                 singleImageBox.style.display = "none";
                 multiImageBox.style.display = "block";
                 formatBox.style.display = "none";
             }
 
-            // BG Remove Tool
             if (tool === "bgremove") {
                 formatBox.style.display = "none";
             }
 
-            // Passport / Signature / Form Photo / Thumbnail
             if (tool === "passport" || tool === "signature" || tool === "formphoto" || tool === "thumbnail") {
                 formatBox.style.display = "block";
             }
