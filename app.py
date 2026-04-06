@@ -112,35 +112,41 @@ def robots():
     robots_txt = """User-agent: *
 Allow: /
 
-Sitemap: https://chhotukumarom93-github-io.onrender.com/sitemap.xml
+Sitemap: https://phototoolspro.co.in/sitemap.xml
 """
     return Response(robots_txt, mimetype="text/plain")
-
 @app.route("/sitemap.xml")
 def sitemap():
     sitemap_xml = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-   <url>
-      <loc>https://chhotukumarom93-github-io.onrender.com/</loc>
-   </url>
-   <url>
-      <loc>https://chhotukumarom93-github-io.onrender.com/about</loc>
-   </url>
-   <url>
-      <loc>https://chhotukumarom93-github-io.onrender.com/contact</loc>
-   </url>
-   <url>
-      <loc>https://chhotukumarom93-github-io.onrender.com/privacy</loc>
-   </url>
+
+<url>
+<loc>https://phototoolspro.co.in/</loc>
+</url>
+
+<url>
+<loc>https://phototoolspro.co.in/about</loc>
+</url>
+
+<url>
+<loc>https://phototoolspro.co.in/contact</loc>
+</url>
+
+<url>
+<loc>https://phototoolspro.co.in/privacy</loc>
+</url>
+
 </urlset>
 """
     return Response(sitemap_xml, mimetype="application/xml")
-
 @app.route("/ads.txt")
 def ads():
-    ads_txt = "google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0"
+    ads_txt = "google.com, pub-9182040370007762, DIRECT, f08c47fec0942fa0"
     return Response(ads_txt, mimetype="text/plain")
 
+@app.route("/favicon.ico")
+def favicon():
+    return send_from_directory("static", "favicon.png")
 # -----------------------------
 # ROUTES
 # -----------------------------
