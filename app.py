@@ -1,7 +1,7 @@
 import os
 import uuid
 import sqlite3
-from flask import Flask, render_template, request, send_from_directory, redirect, url_for, flash
+from flask import Flask, render_template, request, send_from_directory, session, Response
 from PIL import Image
 from werkzeug.utils import secure_filename
 from rembg import remove
@@ -19,7 +19,6 @@ def init_db():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
 
-    # Visitor counter table
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS visits (
             id INTEGER PRIMARY KEY,
@@ -27,7 +26,6 @@ def init_db():
         )
     """)
 
-    # Contact messages table
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS messages (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,7 +35,6 @@ def init_db():
         )
     """)
 
-    # Insert default counter row if not exists
     cursor.execute("SELECT * FROM visits WHERE id = 1")
     row = cursor.fetchone()
     if not row:
@@ -46,7 +43,6 @@ def init_db():
     conn.commit()
     conn.close()
 
-# Start DB on app run
 init_db()
 
 # -----------------------------
@@ -81,10 +77,12 @@ def create_preview(img, filename):
     preview_path = os.path.join(PREVIEW_FOLDER, filename)
     preview_img = img.copy()
     preview_img.thumbnail((500, 500))
+
     if preview_img.mode in ("RGBA", "P"):
         preview_img.save(preview_path, format="PNG")
     else:
         preview_img.save(preview_path, format="JPEG", quality=85)
+
     return filename
 
 def compress_to_target(img, output_path, target_kb=100, fmt="JPEG"):
@@ -107,6 +105,43 @@ def resize_exact(img, width, height):
     return img.resize((width, height))
 
 # -----------------------------
+# SEO / ADS ROUTES
+# -----------------------------
+@app.route("/robots.txt")
+def robots():
+    robots_txt = """User-agent: *
+Allow: /
+
+Sitemap: https://chhotukumarom93-github-io.onrender.com/sitemap.xml
+"""
+    return Response(robots_txt, mimetype="text/plain")
+
+@app.route("/sitemap.xml")
+def sitemap():
+    sitemap_xml = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+      <loc>https://chhotukumarom93-github-io.onrender.com/</loc>
+   </url>
+   <url>
+      <loc>https://chhotukumarom93-github-io.onrender.com/about</loc>
+   </url>
+   <url>
+      <loc>https://chhotukumarom93-github-io.onrender.com/contact</loc>
+   </url>
+   <url>
+      <loc>https://chhotukumarom93-github-io.onrender.com/privacy</loc>
+   </url>
+</urlset>
+"""
+    return Response(sitemap_xml, mimetype="application/xml")
+
+@app.route("/ads.txt")
+def ads():
+    ads_txt = "google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0"
+    return Response(ads_txt, mimetype="text/plain")
+
+# -----------------------------
 # ROUTES
 # -----------------------------
 @app.route("/", methods=["GET", "POST"])
@@ -114,14 +149,14 @@ def home():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
 
-    # increase visit count
-    cursor.execute("UPDATE visits SET total_visits = total_visits + 1 WHERE id = 1")
-    conn.commit()
+    # Unique visitor count (session based)
+    if not session.get("visited"):
+        cursor.execute("UPDATE visits SET total_visits = total_visits + 1 WHERE id = 1")
+        conn.commit()
+        session["visited"] = True
 
-    # get updated count
     cursor.execute("SELECT total_visits FROM visits WHERE id = 1")
     visitor_count = cursor.fetchone()[0]
-
     conn.close()
 
     result = {}
@@ -141,14 +176,9 @@ def home():
 
                 if not valid_files:
                     result["error"] = "Please upload images for PDF."
-                    return render_template(
-                        "index.html",
-                        result=result,
-                        selected_tool=selected_tool,
-                        visitor_count=visitor_count
-                    )
+                    return render_template("index.html", result=result, selected_tool=selected_tool, visitor_count=visitor_count)
 
-                pdf = FPDF()
+                pdf = FPDF(unit="mm", format="A4")
                 temp_paths = []
 
                 for f in valid_files:
@@ -163,7 +193,20 @@ def home():
                     img.save(temp_jpg, "JPEG")
 
                     pdf.add_page()
-                    pdf.image(temp_jpg, x=10, y=10, w=190)
+
+                    img_width, img_height = img.size
+                    page_width = 190
+                    ratio = page_width / img_width
+                    new_height = img_height * ratio
+
+                    if new_height > 277:
+                        new_height = 277
+                        page_width = img_width * (new_height / img_height)
+
+                    x = (210 - page_width) / 2
+                    y = (297 - new_height) / 2
+
+                    pdf.image(temp_jpg, x=x, y=y, w=page_width, h=new_height)
 
                     os.remove(temp_jpg)
 
@@ -176,12 +219,7 @@ def home():
                 result["preview_file"] = None
                 result["preview_folder"] = "outputs"
 
-                return render_template(
-                    "index.html",
-                    result=result,
-                    selected_tool=selected_tool,
-                    visitor_count=visitor_count
-                )
+                return render_template("index.html", result=result, selected_tool=selected_tool, visitor_count=visitor_count)
 
             # -----------------------------
             # SINGLE IMAGE TOOLS
@@ -193,12 +231,7 @@ def home():
                     result["error"] = "Please upload an image for background removal."
                 else:
                     result["error"] = "Please upload an image."
-                return render_template(
-                    "index.html",
-                    result=result,
-                    selected_tool=selected_tool,
-                    visitor_count=visitor_count
-                )
+                return render_template("index.html", result=result, selected_tool=selected_tool, visitor_count=visitor_count)
 
             filename = unique_filename(secure_filename(file.filename))
             upload_path = os.path.join(UPLOAD_FOLDER, filename)
@@ -220,6 +253,7 @@ def home():
                 "PNG": "png",
                 "WEBP": "webp"
             }
+
             output_ext = ext_map.get(output_format, "jpg")
             output_name = f"{uuid.uuid4().hex}.{output_ext}"
             output_path = os.path.join(OUTPUT_FOLDER, output_name)
@@ -255,7 +289,6 @@ def home():
             # PASSPORT PHOTO
             # -----------------------------
             elif tool == "passport":
-                # Passport size approx: 413x531 px
                 working_img = img.copy().convert("RGB")
                 working_img = resize_exact(working_img, 413, 531)
 
@@ -273,7 +306,6 @@ def home():
             # SIGNATURE RESIZE
             # -----------------------------
             elif tool == "signature":
-                # Signature approx: 300x100
                 working_img = img.copy().convert("RGBA")
                 working_img = resize_exact(working_img, 300, 100)
 
@@ -294,7 +326,6 @@ def home():
             # FORM PHOTO
             # -----------------------------
             elif tool == "formphoto":
-                # Common form photo approx: 300x400
                 working_img = img.copy().convert("RGB")
                 working_img = resize_exact(working_img, 300, 400)
 
@@ -312,26 +343,33 @@ def home():
             # BACKGROUND REMOVER
             # -----------------------------
             elif tool == "bgremove":
-                input_image = Image.open(upload_path).convert("RGBA")
-                output_image = remove(input_image)
+                try:
+                    input_image = Image.open(upload_path).convert("RGBA")
 
-                output_name = f"{uuid.uuid4().hex}.png"
-                output_path = os.path.join(OUTPUT_FOLDER, output_name)
-                output_image.save(output_path)
+                    # Render free ke liye image halka karo
+                    input_image.thumbnail((1000, 1000))
 
-                preview_name = f"preview_{output_name}"
-                create_preview(output_image, preview_name)
+                    output_image = remove(input_image)
 
-                result["success"] = "Background removed successfully!"
-                result["download_file"] = output_name
-                result["preview_file"] = preview_name
-                result["preview_folder"] = "previews"
+                    output_name = f"{uuid.uuid4().hex}.png"
+                    output_path = os.path.join(OUTPUT_FOLDER, output_name)
+                    output_image.save(output_path)
+
+                    preview_name = f"preview_{output_name}"
+                    create_preview(output_image, preview_name)
+
+                    result["success"] = "Background removed successfully!"
+                    result["download_file"] = output_name
+                    result["preview_file"] = preview_name
+                    result["preview_folder"] = "previews"
+
+                except Exception as e:
+                    result["error"] = f"Background remover failed: {str(e)}"
 
             # -----------------------------
             # THUMBNAIL TOOL
             # -----------------------------
             elif tool == "thumbnail":
-                # YouTube thumbnail approx: 1280x720
                 working_img = img.copy().convert("RGB")
                 working_img = resize_exact(working_img, 1280, 720)
 
@@ -354,9 +392,8 @@ def home():
     return render_template("index.html", result=result, selected_tool=selected_tool, visitor_count=visitor_count)
 
 # -----------------------------
-# DOWNLOAD ROUTE
+# OTHER ROUTES
 # -----------------------------
-
 @app.route("/privacy")
 def privacy():
     return render_template("privacy.html")
