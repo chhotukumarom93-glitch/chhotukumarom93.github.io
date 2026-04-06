@@ -3,44 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Tools Pro</title>
+
+    <!-- SEO -->
+    <title>Photo Tools Pro - Compress Image, Remove Background, Passport Photo, PDF Tool</title>
+    <meta name="description" content="Free online Photo Tools Pro website to compress images, remove background, make passport size photos, resize signatures, create thumbnails and convert images to PDF.">
+    <meta name="keywords" content="photo compressor online, background remover free, passport photo maker, image to pdf, signature resize, thumbnail maker, photo tools pro">
+    <meta name="author" content="Photo Tools Pro">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#2563eb">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Photo Tools Pro">
+    <meta property="og:description" content="Compress Image, Remove Background, Passport Photo, Signature Resize, PDF Tool and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chhotukumarom93-github-io.onrender.com/">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XH3TGNG491P"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XH3TGNG491P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XH3TGNG491P');
+    </script>
 
-  gtag('config', 'G-XH3TGNG491P');
-</script>
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXX"
-     crossorigin="anonymous"></script>
-
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXX"
+         crossorigin="anonymous"></script>
 </head>
 <body>
 
-<!-- Top Ad -->
-<div class="top-ad">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
-         data-ad-slot="1111111111"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
+    <!-- Top Ad -->
+    <div class="top-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
+             data-ad-slot="1111111111"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 
     <div class="container">
 
         <!-- Header -->
         <div class="header">
+            <div class="brand-badge">TRUSTED ONLINE PHOTO TOOL</div>
             <h1>📸 Photo Tools Pro</h1>
             <p>Compress • Passport • Signature • PDF • BG Remove • Thumbnail</p>
+            <p class="mini-tagline">Fast • Clean • Free • Professional Quality</p>
+        </div>
+
+        <!-- Visitor Count -->
+        <div class="visitor-box">
+            👁 Unique Visitors: {{ visitor_count }}
         </div>
 
         <!-- Card -->
@@ -74,13 +94,13 @@
                 <!-- Single Upload -->
                 <div id="singleImageBox">
                     <label>Upload Image</label>
-                    <input type="file" name="image">
+                    <input type="file" name="image" accept="image/*">
                 </div>
 
                 <!-- Multiple Upload -->
                 <div id="multiImageBox" style="display:none;">
                     <label>Upload Multiple Images (for PDF)</label>
-                    <input type="file" name="images" multiple>
+                    <input type="file" name="images" multiple accept="image/*">
                 </div>
 
                 <!-- Target Size -->
@@ -114,56 +134,73 @@
                 <button type="submit">🚀 Process Now</button>
             </form>
 
-           <!-- Download -->
-{% if result and result.download_file %}
-<div class="download-section">
-    <a class="download-btn" href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}">
-        ⬇ Download Result
-    </a>
-</div>
-{% endif %}
+            <!-- Download -->
+            {% if result and result.download_file %}
+            <div class="download-section">
+                <a class="download-btn" href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}">
+                    ⬇ Download Result
+                </a>
+            </div>
+            {% endif %}
 
-<!-- Preview -->
-{% if result and result.preview_file %}
-<div class="preview-section">
-    <h3>Preview</h3>
-    <img class="preview-img" src="{{ url_for('static', filename=result.preview_folder + '/' + result.preview_file) }}" alt="Preview">
-</div>
-{% endif %}
-
+            <!-- Preview -->
+            {% if result and result.preview_file %}
+            <div class="preview-section">
+                <h3>Preview</h3>
+                <img class="preview-img" src="{{ url_for('static', filename=result.preview_folder + '/' + result.preview_file) }}" alt="Preview">
+            </div>
+            {% endif %}
         </div>
 
-<!-- Middle Ad -->
-<div class="middle-ad">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
-         data-ad-slot="2222222222"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
+        <!-- Features Strip -->
+        <div class="trust-strip">
+            <span>⚡ Fast Processing</span>
+            <span>🔒 Safe Upload</span>
+            <span>📱 Mobile Friendly</span>
+            <span>🛠 Professional Tools</span>
+        </div>
 
-        <!-- Footer -->
+        <!-- Middle Ad -->
+        <div class="middle-ad">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
+                 data-ad-slot="2222222222"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Small Footer Text -->
         <div class="footer">
-            © 2026 Photo Tools Pro | All Rights Reserved
+            © 2026 Photo Tools Pro | Smart Online Editing Tools
         </div>
     </div>
 
-<!-- Bottom Ad -->
-<div class="bottom-ad">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
-         data-ad-slot="3333333333"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
+    <!-- Bottom Ad -->
+    <div class="bottom-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
+             data-ad-slot="3333333333"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- Footer Links -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/about">About Us</a>
+            <a href="/contact">Contact Us</a>
+        </div>
+        <p>© 2026 Photo Tools Pro. All rights reserved.</p>
+    </footer>
 
     <script>
         function toggleFields() {
@@ -176,55 +213,42 @@
             let heightBox = document.getElementById("heightBox");
             let formatBox = document.getElementById("formatBox");
 
-            // Default
+            // Default hidden first
             singleImageBox.style.display = "block";
             multiImageBox.style.display = "none";
-            targetSizeBox.style.display = "block";
-            widthBox.style.display = "block";
-            heightBox.style.display = "block";
+            targetSizeBox.style.display = "none";
+            widthBox.style.display = "none";
+            heightBox.style.display = "none";
             formatBox.style.display = "block";
 
-            // BG Remove
-            if (tool === "bgremove") {
-                targetSizeBox.style.display = "none";
-                widthBox.style.display = "none";
-                heightBox.style.display = "none";
-                formatBox.style.display = "none";
+            // Compress Tool
+            if (tool === "compress") {
+                targetSizeBox.style.display = "block";
+                widthBox.style.display = "block";
+                heightBox.style.display = "block";
+                formatBox.style.display = "block";
             }
 
-            // PDF
+            // PDF Tool
             if (tool === "pdf") {
                 singleImageBox.style.display = "none";
                 multiImageBox.style.display = "block";
-                targetSizeBox.style.display = "none";
-                widthBox.style.display = "none";
-                heightBox.style.display = "none";
                 formatBox.style.display = "none";
             }
 
-            // Other resize tools
+            // BG Remove Tool
+            if (tool === "bgremove") {
+                formatBox.style.display = "none";
+            }
+
+            // Passport / Signature / Form Photo / Thumbnail
             if (tool === "passport" || tool === "signature" || tool === "formphoto" || tool === "thumbnail") {
-                targetSizeBox.style.display = "none";
+                formatBox.style.display = "block";
             }
         }
 
         window.onload = toggleFields;
-
-<div style="text-align:center; margin:20px 0;">
-    <p style="font-size:18px; font-weight:bold; color:#222;">
-        👁 Total Visitors: {{ visitor_count }}
-    </p>
-</div>
-
     </script>
-<footer class="site-footer">
-    <div>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/about">About Us</a>
-        <a href="/contact">Contact Us</a>
-    </div>
-    <p>© 2026 Photo Tools Pro | All Rights Reserved</p>
-</footer>
 
 </body>
 </html>
