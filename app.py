@@ -146,7 +146,7 @@ def ads():
 
 @app.route("/favicon.ico")
 def favicon():
-    return send_from_directory("static", "favicon.png")
+    return send_from_directory("static", "favicon.ico")
 # -----------------------------
 # ROUTES
 # -----------------------------
