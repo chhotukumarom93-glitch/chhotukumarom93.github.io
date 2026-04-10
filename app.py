@@ -120,8 +120,18 @@ def sitemap():
     sitemap_xml = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+<urlset>
+
 <url>
 <loc>https://phototoolspro.co.in/</loc>
+</url>
+
+<url>
+<loc>https://phototoolspro.co.in/tool</loc>
+</url>
+
+<url>
+<loc>https://phototoolspro.co.in/compress-image</loc>
 </url>
 
 <url>
@@ -136,8 +146,7 @@ def sitemap():
 <loc>https://phototoolspro.co.in/privacy</loc>
 </url>
 
-</urlset>
-"""
+</urlset>"""
     return Response(sitemap_xml, mimetype="application/xml")
 @app.route("/ads.txt")
 def ads():
@@ -401,6 +410,17 @@ def home():
 # -----------------------------
 # OTHER ROUTES
 # -----------------------------
+# -----------------------------
+# NEW SEO ROUTES (YAH ADD KARO)
+# -----------------------------
+@app.route("/tool")
+def tool_page():
+    return render_template("index.html")
+
+@app.route("/compress-image")
+def compress_page():
+    return render_template("index.html")
+
 @app.route("/privacy")
 def privacy():
     return render_template("privacy.html")
