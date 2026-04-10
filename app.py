@@ -115,41 +115,21 @@ Allow: /
 Sitemap: https://phototoolspro.co.in/sitemap.xml
 """
     return Response(robots_txt, mimetype="text/plain")
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 @app.route("/sitemap.xml")
 def sitemap():
-    sitemap_xml = """<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-<urlset>
-
-<url>
-<loc>https://phototoolspro.co.in/</loc>
-</url>
-
-<url>
-<loc>https://phototoolspro.co.in/tool</loc>
-</url>
-
-<url>
-<loc>https://phototoolspro.co.in/compress-image</loc>
-</url>
-
-<url>
-<loc>https://phototoolspro.co.in/about</loc>
-</url>
-
-<url>
-<loc>https://phototoolspro.co.in/contact</loc>
-</url>
-
-<url>
-<loc>https://phototoolspro.co.in/privacy</loc>
-</url>
-
-</urlset>
-"""
-    return Response(sitemap_xml, mimetype="application/xml")
-@app.route("/ads.txt")
+    return Response(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        '<url><loc>https://phototoolspro.co.in/</loc></url>\n'
+        '<url><loc>https://phototoolspro.co.in/tool</loc></url>\n'
+        '<url><loc>https://phototoolspro.co.in/compress-image</loc></url>\n'
+        '<url><loc>https://phototoolspro.co.in/about</loc></url>\n'
+        '<url><loc>https://phototoolspro.co.in/contact</loc></url>\n'
+        '<url><loc>https://phototoolspro.co.in/privacy</loc></url>\n'
+        '</urlset>',
+        mimetype="application/xml"
+    )@app.route("/ads.txt")
 def ads():
     ads_txt = "google.com, pub-9182040370007762, DIRECT, f08c47fec0942fa0"
     return Response(ads_txt, mimetype="text/plain")
