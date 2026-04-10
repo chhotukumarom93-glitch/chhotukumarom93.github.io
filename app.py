@@ -148,6 +148,7 @@ def sitemap():
 </urlset>
 """
     return Response(sitemap_xml, mimetype="application/xml")
+ @app.route("/ads.txt")
 def ads():
     ads_txt = "google.com, pub-9182040370007762, DIRECT, f08c47fec0942fa0"
     return Response(ads_txt, mimetype="text/plain")
