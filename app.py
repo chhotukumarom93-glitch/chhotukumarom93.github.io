@@ -146,7 +146,8 @@ def sitemap():
 <loc>https://phototoolspro.co.in/privacy</loc>
 </url>
 
-</urlset>"""
+</urlset>
+"""
     return Response(sitemap_xml, mimetype="application/xml")
 @app.route("/ads.txt")
 def ads():
