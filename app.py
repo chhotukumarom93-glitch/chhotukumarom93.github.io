@@ -115,7 +115,6 @@ Allow: /
 Sitemap: https://phototoolspro.co.in/sitemap.xml
 """
     return Response(robots_txt, mimetype="text/plain")
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 @app.route("/sitemap.xml")
 def sitemap():
     sitemap_xml = """<?xml version="1.0" encoding="UTF-8"?>
@@ -123,14 +122,6 @@ def sitemap():
 
 <url>
 <loc>https://phototoolspro.co.in/</loc>
-</url>
-
-<url>
-<loc>https://phototoolspro.co.in/tool</loc>
-</url>
-
-<url>
-<loc>https://phototoolspro.co.in/compress-image</loc>
 </url>
 
 <url>
@@ -148,11 +139,10 @@ def sitemap():
 </urlset>
 """
     return Response(sitemap_xml, mimetype="application/xml")
- @app.route("/ads.txt")
+@app.route("/ads.txt")
 def ads():
     ads_txt = "google.com, pub-9182040370007762, DIRECT, f08c47fec0942fa0"
     return Response(ads_txt, mimetype="text/plain")
-
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
