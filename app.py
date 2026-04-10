@@ -124,6 +124,8 @@ def sitemap():
 <loc>https://phototoolspro.co.in/</loc>
 </url>
 
+</url>  <url>  <loc>https://phototoolspro.co.in/compress-images/loc>
+
 <url>
 <loc>https://phototoolspro.co.in/about</loc>
 </url>
