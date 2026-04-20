@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO -->
     <title>Photo Tools Pro - Compress Image, Remove Background, Passport Photo, PDF Tool</title>
     <meta name="description" content="Free online Photo Tools Pro website to compress images, remove background, make passport size photos, resize signatures, create thumbnails and convert images to PDF.">
     <meta name="keywords" content="photo compressor online, background remover free, passport photo maker, image to pdf, signature resize, thumbnail maker, photo tools pro">
@@ -12,7 +11,6 @@
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#2563eb">
 
-    <!-- Open Graph -->
     <meta property="og:title" content="Photo Tools Pro">
     <meta property="og:description" content="Compress Image, Remove Background, Passport Photo, Signature Resize, PDF Tool and more.">
     <meta property="og:type" content="website">
@@ -20,7 +18,6 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XH3TGN491P"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -29,19 +26,14 @@
       gtag('config', 'G-XH3TGN491P');
     </script>
 
-   <!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9182040370007762"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9182040370007762"
      crossorigin="anonymous"></script>
 
-<meta name="google-adsense-account" content="ca-pub-9182040370007762">
-<!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-<link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <meta name="google-adsense-account" content="ca-pub-9182040370007762">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
 
-    <!-- Top Ad -->
     <div class="top-ad">
         <ins class="adsbygoogle"
              style="display:block"
@@ -49,14 +41,11 @@
              data-ad-slot="6517689966"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <div class="container">
 
-        <!-- Header -->
         <div class="header">
             <div class="brand-badge">TRUSTED ONLINE PHOTO TOOL</div>
             <h1>📸 Photo Tools Pro</h1>
@@ -64,12 +53,10 @@
             <p class="mini-tagline">Fast • Clean • Free • Professional Quality</p>
         </div>
 
-        <!-- Visitor Count -->
         <div class="visitor-box">
             <p>👁 Unique Visitors: {{ visitor_count }}</p>
         </div>
 
-        <!-- Features Strip -->
         <div class="trust-strip">
             <span>⚡ Fast Processing</span>
             <span>🔒 Safe Upload</span>
@@ -77,9 +64,7 @@
             <span>🛠 Professional Tools</span>
         </div>
 
-        <!-- Card -->
         <div class="card">
-
             {% if result %}
                 {% if result.success %}
                     <div class="success-box">{{ result.success }}</div>
@@ -90,16 +75,15 @@
             {% endif %}
 
             <form method="POST" enctype="multipart/form-data">
-
                 <label for="toolSelect">Select Tool</label>
                 <select name="tool" id="toolSelect" onchange="toggleFields()">
-                    <option value="compress" {% if selected_tool == "compress" %}selected{% endif %}>Image Compressor</option>
-                    <option value="passport" {% if selected_tool == "passport" %}selected{% endif %}>Passport Photo Maker</option>
-                    <option value="signature" {% if selected_tool == "signature" %}selected{% endif %}>Signature Resize</option>
-                    <option value="formphoto" {% if selected_tool == "formphoto" %}selected{% endif %}>Form Photo Resize</option>
-                    <option value="bgremove" {% if selected_tool == "bgremove" %}selected{% endif %}>Background Remover</option>
-                    <option value="pdf" {% if selected_tool == "pdf" %}selected{% endif %}>Image to PDF</option>
-                    <option value="thumbnail" {% if selected_tool == "thumbnail" %}selected{% endif %}>Thumbnail Tool</option>
+                    <option value="compress">Image Compressor</option>
+                    <option value="passport">Passport Photo Maker</option>
+                    <option value="signature">Signature Resize</option>
+                    <option value="formphoto">Form Photo Resize</option>
+                    <option value="bgremove">Background Remover</option>
+                    <option value="pdf">Image to PDF</option>
+                    <option value="thumbnail">Thumbnail Tool</option>
                 </select>
 
                 <div id="singleImageBox">
@@ -117,12 +101,12 @@
                     <input type="number" name="target_kb" placeholder="e.g. 100">
                 </div>
 
-                <div id="widthBox">
+                <div id="widthBox" style="display:none;">
                     <label>Width (optional)</label>
                     <input type="number" name="width" placeholder="e.g. 800">
                 </div>
 
-                <div id="heightBox">
+                <div id="heightBox" style="display:none;">
                     <label>Height (optional)</label>
                     <input type="number" name="height" placeholder="e.g. 600">
                 </div>
@@ -146,26 +130,45 @@
                 </a>
             </div>
             {% endif %}
-
-            {% if result and result.preview_file %}
-            <div class="preview-section">
-                <h3>Preview</h3>
-                <img class="preview-img" src="{{ url_for('static', filename=result.preview_folder + '/' + result.preview_file) }}" alt="Preview">
-            </div>
-            {% endif %}
         </div>
 
-        <!-- Middle Ad -->
-        <div class="middle-ad">
+        <div class="content-info-section" style="margin-top: 40px; text-align: left; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h2 style="color: #2563eb; border-bottom: 2px solid #eee; padding-bottom: 10px;">Why Choose Photo Tools Pro?</h2>
+            
+            <div style="margin-top: 20px;">
+                <h4 style="color: #1e293b;">1. Professional Image Compressor</h4>
+                <p style="color: #64748b;">Photo Tools Pro Image Compressor is a powerful tool designed to reduce image file size without losing quality. Whether you are filling out an official government form or uploading photos to social media, our tool ensures your images are perfectly optimized. It supports JPG, PNG, and WebP formats, making it easy for users in India to manage their digital documents efficiently.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h4 style="color: #1e293b;">2. Passport Photo Maker</h4>
+                <p style="color: #64748b;">Create professional passport-size photos in seconds. This tool is specially designed for students and job seekers who need to resize their photos according to official requirements. You can easily adjust the background and dimensions to meet the specifications of various entrance exams like UPSC, SSC, or Railway forms.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h4 style="color: #1e293b;">3. AI Background Remover</h4>
+                <p style="color: #64748b;">Our AI-powered Background Remover tool allows you to remove or change the background of any image instantly. It is perfect for product photography, creating profile pictures, or making transparent PNGs. Get high-quality results with just one click, saving you time and effort in photo editing.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h4 style="color: #1e293b;">4. High-Quality Image to PDF</h4>
+                <p style="color: #64748b;">Convert your images and scanned documents into a single, high-quality PDF file. This tool is essential for students at Magadh University and beyond to submit their assignments and projects online. It is fast, secure, and preserves the original clarity of your documents.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h4 style="color: #1e293b;">5. Signature & Form Photo Resize</h4>
+                <p style="color: #64748b;">Avoid rejection of your online applications by using our specialized Signature and Form Photo Resizer. We provide exact dimensions and file size control (in KB) required for various online registration portals. This is the most trusted utility for Indian competitive exam aspirants.</p>
+            </div>
+        </div>
+
+        <div class="middle-ad" style="margin-top: 30px;">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-9182040370007762"
                  data-ad-slot="6517689966"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
         <div class="footer">
@@ -173,7 +176,6 @@
         </div>
     </div>
 
-    <!-- Footer Links -->
     <footer class="site-footer">
         <div class="footer-links">
             <a href="/privacy">Privacy Policy</a>
@@ -186,7 +188,6 @@
     <script>
         function toggleFields() {
             let tool = document.getElementById("toolSelect").value;
-
             let singleImageBox = document.getElementById("singleImageBox");
             let multiImageBox = document.getElementById("multiImageBox");
             let targetSizeBox = document.getElementById("targetSizeBox");
@@ -205,26 +206,17 @@
                 targetSizeBox.style.display = "block";
                 widthBox.style.display = "block";
                 heightBox.style.display = "block";
-                formatBox.style.display = "block";
             }
-
             if (tool === "pdf") {
                 singleImageBox.style.display = "none";
                 multiImageBox.style.display = "block";
                 formatBox.style.display = "none";
             }
-
             if (tool === "bgremove") {
                 formatBox.style.display = "none";
             }
-
-            if (tool === "passport" || tool === "signature" || tool === "formphoto" || tool === "thumbnail") {
-                formatBox.style.display = "block";
-            }
         }
-
         window.onload = toggleFields;
     </script>
-
 </body>
 </html>
