@@ -131,27 +131,51 @@
             </div>
             {% endif %}
 
-            {% if result and result.preview_file %}
-            <div class="preview-section" style="margin-top: 20px;">
-                <h3 style="margin-bottom: 10px;">Preview</h3>
-                <img class="preview-img" src="{{ url_for('static', filename=result.preview_folder + '/' + result.preview_file) }}" alt="Preview" style="max-width: 100%; border-radius: 8px;">
-            </div>
-            {% endif %}
+{% if result and result.preview_file %}
+<div class="preview-section" style="margin-top: 20px; text-align: center;">
+    <p style="font-weight: bold; color: #666; font-size: 0.9rem;">Preview</p>
+    <div style="display: flex; justify-content: center;">
+        <img class="preview-img" 
+             src="{{ url_for('static', filename=result.preview_folder + '/' + result.preview_file) }}" 
+             alt="Preview" 
+             style="max-width: 250px; height: auto; border-radius: 8px; border: 2px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    </div>
+</div>
+{% endif %}
         </div>
 
-        <div class="info-section" style="margin-top: 30px; text-align: left; background: #fdfdfd; border: 1px solid #eee; border-radius: 10px; padding: 15px;">
-            <details style="cursor: pointer;">
-                <summary style="font-weight: bold; color: #2563eb; font-size: 1.1rem; list-style: none;">
-                    ℹ️ Why Choose Photo Tools Pro? (Click to Read)
-                </summary>
-                <div style="margin-top: 15px; font-size: 0.95rem; color: #444; line-height: 1.6;">
-                    <p><strong>1. Professional Image Compressor:</strong> Photo Tools Pro Image Compressor reduces file size without losing quality. Perfect for official government forms.</p>
-                    <p><strong>2. Passport Photo Maker:</strong> Create professional passport-size photos in seconds for entrance exams like UPSC, SSC, or Railway.</p>
-                    <p><strong>3. AI Background Remover:</strong> Remove or change backgrounds instantly for product photography or profile pictures.</p>
-                    <p><strong>4. High-Quality Image to PDF:</strong> Convert scanned documents into high-quality PDFs for university submissions.</p>
-                    <p><strong>5. Signature & Form Resize:</strong> Specialized tool for resizing signatures as per Indian competitive exam registration portals.</p>
+        <div class="pro-footer-info" style="margin-top: 50px; padding: 30px 10px; border-top: 1px solid #eee; text-align: left;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                
+                <div>
+                    <h4 style="color: #2563eb; font-size: 1.1rem; margin-bottom: 15px;">Image Mastering</h4>
+                    <p style="font-size: 0.85rem; color: #64748b; line-height: 1.6;">
+                        <strong>Image Compressor:</strong> High-quality KB reduction for all formats.<br>
+                        <strong>Passport Maker:</strong> Official 3.5x4.5cm sizing for Indian exams.<br>
+                        <strong>AI Background Remover:</strong> Clean and instant transparent backgrounds.
+                    </p>
                 </div>
-            </details>
+
+                <div>
+                    <h4 style="color: #2563eb; font-size: 1.1rem; margin-bottom: 15px;">Fast Utilities</h4>
+                    <p style="font-size: 0.85rem; color: #64748b; line-height: 1.6;">
+                        <strong>Image to PDF:</strong> Combine multiple photos into one secure PDF.<br>
+                        <strong>Signature Resize:</strong> Perfect dimensions for UPSC, SSC & Banks.<br>
+                        <strong>Thumbnail Tool:</strong> Creative freedom for YouTube creators.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 style="color: #2563eb; font-size: 1.1rem; margin-bottom: 15px;">Social Mission</h4>
+                    <p style="font-size: 0.85rem; color: #64748b; line-height: 1.6;">
+                        Photo Tools Pro is built in <strong>Aurangabad, Bihar</strong>. 50% of our ad revenue is donated to help poor children's education and street animal welfare.
+                    </p>
+                </div>
+
+            </div>
+            <div style="margin-top: 40px; text-align: center; font-size: 0.7rem; color: #cbd5e1;">
+                Online Photo Editor • Image Compressor India • Free Background Remover • Convert JPG to PDF
+            </div>
         </div>
 
         <div class="middle-ad" style="margin-top: 30px;">
