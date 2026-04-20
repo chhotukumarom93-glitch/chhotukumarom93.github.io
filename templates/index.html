@@ -124,41 +124,34 @@
             </form>
 
             {% if result and result.download_file %}
-            <div class="download-section">
+            <div class="download-section" style="margin-top: 20px;">
                 <a class="download-btn" href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}">
                     ⬇ Download Result
                 </a>
             </div>
             {% endif %}
+
+            {% if result and result.preview_file %}
+            <div class="preview-section" style="margin-top: 20px;">
+                <h3 style="margin-bottom: 10px;">Preview</h3>
+                <img class="preview-img" src="{{ url_for('static', filename=result.preview_folder + '/' + result.preview_file) }}" alt="Preview" style="max-width: 100%; border-radius: 8px;">
+            </div>
+            {% endif %}
         </div>
 
-        <div class="content-info-section" style="margin-top: 40px; text-align: left; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <h2 style="color: #2563eb; border-bottom: 2px solid #eee; padding-bottom: 10px;">Why Choose Photo Tools Pro?</h2>
-            
-            <div style="margin-top: 20px;">
-                <h4 style="color: #1e293b;">1. Professional Image Compressor</h4>
-                <p style="color: #64748b;">Photo Tools Pro Image Compressor is a powerful tool designed to reduce image file size without losing quality. Whether you are filling out an official government form or uploading photos to social media, our tool ensures your images are perfectly optimized. It supports JPG, PNG, and WebP formats, making it easy for users in India to manage their digital documents efficiently.</p>
-            </div>
-
-            <div style="margin-top: 20px;">
-                <h4 style="color: #1e293b;">2. Passport Photo Maker</h4>
-                <p style="color: #64748b;">Create professional passport-size photos in seconds. This tool is specially designed for students and job seekers who need to resize their photos according to official requirements. You can easily adjust the background and dimensions to meet the specifications of various entrance exams like UPSC, SSC, or Railway forms.</p>
-            </div>
-
-            <div style="margin-top: 20px;">
-                <h4 style="color: #1e293b;">3. AI Background Remover</h4>
-                <p style="color: #64748b;">Our AI-powered Background Remover tool allows you to remove or change the background of any image instantly. It is perfect for product photography, creating profile pictures, or making transparent PNGs. Get high-quality results with just one click, saving you time and effort in photo editing.</p>
-            </div>
-
-            <div style="margin-top: 20px;">
-                <h4 style="color: #1e293b;">4. High-Quality Image to PDF</h4>
-                <p style="color: #64748b;">Convert your images and scanned documents into a single, high-quality PDF file. This tool is essential for students at Magadh University and beyond to submit their assignments and projects online. It is fast, secure, and preserves the original clarity of your documents.</p>
-            </div>
-
-            <div style="margin-top: 20px;">
-                <h4 style="color: #1e293b;">5. Signature & Form Photo Resize</h4>
-                <p style="color: #64748b;">Avoid rejection of your online applications by using our specialized Signature and Form Photo Resizer. We provide exact dimensions and file size control (in KB) required for various online registration portals. This is the most trusted utility for Indian competitive exam aspirants.</p>
-            </div>
+        <div class="info-section" style="margin-top: 30px; text-align: left; background: #fdfdfd; border: 1px solid #eee; border-radius: 10px; padding: 15px;">
+            <details style="cursor: pointer;">
+                <summary style="font-weight: bold; color: #2563eb; font-size: 1.1rem; list-style: none;">
+                    ℹ️ Why Choose Photo Tools Pro? (Click to Read)
+                </summary>
+                <div style="margin-top: 15px; font-size: 0.95rem; color: #444; line-height: 1.6;">
+                    <p><strong>1. Professional Image Compressor:</strong> Photo Tools Pro Image Compressor reduces file size without losing quality. Perfect for official government forms.</p>
+                    <p><strong>2. Passport Photo Maker:</strong> Create professional passport-size photos in seconds for entrance exams like UPSC, SSC, or Railway.</p>
+                    <p><strong>3. AI Background Remover:</strong> Remove or change backgrounds instantly for product photography or profile pictures.</p>
+                    <p><strong>4. High-Quality Image to PDF:</strong> Convert scanned documents into high-quality PDFs for university submissions.</p>
+                    <p><strong>5. Signature & Form Resize:</strong> Specialized tool for resizing signatures as per Indian competitive exam registration portals.</p>
+                </div>
+            </details>
         </div>
 
         <div class="middle-ad" style="margin-top: 30px;">
