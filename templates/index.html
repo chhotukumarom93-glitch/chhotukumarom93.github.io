@@ -3,205 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Photo Tools Pro - Free Image Compressor & PDF Utility</title>
-    <meta name="description" content="Photo Tools Pro: Compress image in KB, remove background, create passport photos, and convert image to PDF for free. Best tool for online forms.">
-    <meta name="keywords" content="photo compressor online, background remover free, passport photo maker, image to pdf, Photo Tools Pro, Aurangabad Bihar">
-    <meta name="author" content="Photo Tools Pro">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#2563eb">
-
+    <title>Photo Tools Pro | Best Online Image Compressor & Photo Utility</title>
+    <meta name="description" content="Use Photo Tools Pro to compress images to 20KB, 50KB or 100KB. Remove background, resize passport photos, and convert images to PDF. Safe, fast, and free.">
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XH3TGN491P"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XH3TGN491P');
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9182040370007762" crossorigin="anonymous"></script>
     <meta name="google-adsense-account" content="ca-pub-9182040370007762">
-    
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    
+
     <style>
-        /* Extra styles for AdSense Approval */
-        .nav-bar { background: #2563eb; padding: 10px 0; text-align: center; margin-bottom: 20px; }
-        .nav-bar a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
-        .tool-info { font-size: 0.85rem; color: #64748b; margin-bottom: 15px; background: #f8fafc; padding: 10px; border-radius: 5px; }
-        .faq-section { margin-top: 40px; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .faq-item { margin-bottom: 20px; }
-        .faq-item h4 { color: #1e40af; margin-bottom: 5px; }
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; color: #1f2937; margin: 0; }
+        .nav-header { background: #ffffff; border-bottom: 1px solid #e5e7eb; padding: 15px 0; position: sticky; top: 0; z-index: 100; }
+        .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #2563eb; text-decoration: none; }
+        .nav-links a { margin-left: 20px; text-decoration: none; color: #4b5563; font-weight: 500; font-size: 0.9rem; }
+        
+        .main-hero { background: #2563eb; color: white; padding: 60px 20px; text-align: center; }
+        .main-hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        
+        .content-wrap { max-width: 900px; margin: -40px auto 40px; padding: 20px; }
+        .tool-card { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 40px; }
+        
+        .info-section { background: white; padding: 40px; border-radius: 16px; line-height: 1.7; color: #374151; margin-bottom: 30px; border: 1px solid #e5e7eb; }
+        .info-section h2 { color: #111827; font-size: 1.8rem; border-left: 5px solid #2563eb; padding-left: 15px; margin-bottom: 20px; }
+        .info-section h3 { color: #1e40af; margin-top: 30px; }
+        .grid-info { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
+        
+        @media (max-width: 768px) { .grid-info { grid-template-columns: 1fr; } .main-hero h1 { font-size: 1.8rem; } }
     </style>
 </head>
 <body>
 
-    <nav class="nav-bar">
-        <a href="/">Home</a>
-        <a href="/about">About Us</a>
-        <a href="/contact">Contact</a>
-        <a href="/privacy">Privacy Policy</a>
-    </nav>
-
-    <div class="container">
-        <div class="top-ad" style="text-align: center; margin-bottom: 20px;">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9182040370007762" data-ad-slot="6517689966" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <header class="nav-header">
+        <div class="nav-container">
+            <a href="/" class="logo">📸 Photo Tools Pro</a>
+            <nav class="nav-links">
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="/privacy">Privacy</a>
+            </nav>
         </div>
+    </header>
 
-        <div class="header">
-            <div class="brand-badge">PRO-LEVEL IMAGE OPTIMIZATION</div>
-            <h1>📸 Photo Tools Pro</h1>
-            <p>The Most Reliable Image Processing Suite Online</p>
-        </div>
+    <section class="main-hero">
+        <h1>Optimize Your Photos Instantly</h1>
+        <p>Compress, Resize, and Perfect Your Images for Online Forms & Social Media</p>
+    </section>
 
-        <div class="card">
-            <div class="tool-info">
-                <strong>Current Selection:</strong> <span id="toolDescription">Select a tool to see how it works.</span>
-            </div>
-
-            {% if result %}
-                {% if result.success %}<div class="success-box">{{ result.success }}</div>{% endif %}
-                {% if result.error %}<div class="error-box">{{ result.error }}</div>{% endif %}
-            {% endif %}
-
+    <div class="content-wrap">
+        <div class="tool-card">
             <form method="POST" enctype="multipart/form-data">
-                <label for="toolSelect">Choose Utility Tool</label>
-                <select name="tool" id="toolSelect" onchange="toggleFields()">
-                    <option value="compress">Image Compressor (Reduce KB)</option>
-                    <option value="passport">Passport Photo Maker (Official Size)</option>
-                    <option value="signature">Signature Resizer (Exam Standard)</option>
-                    <option value="formphoto">Form Photo Resize</option>
+                <label style="display:block; margin-bottom:8px; font-weight:600;">Select Your Utility Tool</label>
+                <select name="tool" id="toolSelect" onchange="toggleFields()" style="width:100%; padding:12px; border-radius:8px; border:1px solid #d1d5db; margin-bottom:20px;">
+                    <option value="compress">Optimizer & Compressor (Reduce KB)</option>
+                    <option value="passport">Passport Photo Generator (3.5x4.5cm)</option>
+                    <option value="signature">Digital Signature Resizer</option>
                     <option value="bgremove">AI Background Remover</option>
-                    <option value="pdf">Image to PDF Converter</option>
-                    <option value="thumbnail">YouTube Thumbnail Maker</option>
+                    <option value="pdf">Convert Image to PDF</option>
+                    <option value="thumbnail">YouTube Thumbnail Creator</option>
                 </select>
 
-                <div id="singleImageBox">
-                    <label>Upload Image (Max 10MB)</label>
-                    <input type="file" name="image" accept="image/*">
+                <div id="inputGroup">
+                    <input type="file" name="image" accept="image/*" style="margin-bottom:20px;">
+                    <div id="targetSizeBox">
+                        <label style="display:block; margin-bottom:5px;">Target Size (KB)</label>
+                        <input type="number" name="target_kb" placeholder="e.g. 50" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ddd;">
+                    </div>
                 </div>
 
-                <div id="multiImageBox" style="display:none;">
-                    <label>Select Multiple Images for PDF</label>
-                    <input type="file" name="images" multiple accept="image/*">
-                </div>
-
-                <div id="targetSizeBox">
-                    <label>Target Size in KB (e.g., 20, 50, 100)</label>
-                    <input type="number" name="target_kb" placeholder="Enter KB value">
-                </div>
-
-                <div id="widthBox" style="display:none;">
-                    <label>Custom Width (px)</label>
-                    <input type="number" name="width" placeholder="e.g. 800">
-                </div>
-
-                <div id="heightBox" style="display:none;">
-                    <label>Custom Height (px)</label>
-                    <input type="number" name="height" placeholder="e.g. 600">
-                </div>
-
-                <div id="formatBox">
-                    <label>Desired Format</label>
-                    <select name="format">
-                        <option value="JPG">JPG (Standard)</option>
-                        <option value="PNG">PNG (High Quality)</option>
-                        <option value="WEBP">WebP (Small Size)</option>
-                    </select>
-                </div>
-
-                <button type="submit" style="background: #2563eb; font-weight: bold;">🚀 Start Processing</button>
+                <button type="submit" style="width:100%; padding:15px; background:#2563eb; color:white; border:none; border-radius:8px; font-size:1.1rem; font-weight:700; cursor:pointer; margin-top:20px;">Process My Image 🚀</button>
             </form>
 
             {% if result and result.download_file %}
-                <div class="download-section" style="margin-top: 25px; text-align: center;">
-                    <a class="download-btn" href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}" style="padding: 12px 30px; background: #059669; color: white; text-decoration: none; border-radius: 5px;">⬇ Download Final File</a>
+                <div style="margin-top:20px; text-align:center;">
+                    <a href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}" style="display:inline-block; padding:12px 25px; background:#059669; color:white; border-radius:6px; text-decoration:none; font-weight:600;">⬇ Download Optimized File</a>
                 </div>
             {% endif %}
         </div>
 
-        <div class="article-section" style="margin-top: 40px; background: #ffffff; padding: 30px; border-radius: 12px; line-height: 1.8;">
-            <h2 style="color: #2563eb; border-bottom: 2px solid #eee; padding-bottom: 10px;">All-in-One Photo Editing Solution for Online Forms</h2>
-            <p>Photo Tools Pro is specifically built to help users who struggle with strict image requirements on government and admission portals. Whether you're applying for UPSC, SSC, or any State Govt exam, our tool ensures your <strong>passport size photo</strong> and <strong>signature resize</strong> tasks are completed in seconds.</p>
+        <div class="info-section">
+            <h2>The Smartest Way to Compress Images Online</h2>
+            <p>Photo Tools Pro is a professional-grade image optimization suite designed to help you balance file size and visual quality. Our platform uses advanced lossy and lossless compression algorithms to ensure that your photos meet the strict requirements of online application portals without becoming blurry or pixelated.</p>
 
-            <h3 style="margin-top:20px;">Why Use Photo Tools Pro Image Compressor?</h3>
-            <p>Our algorithm focuses on <strong>lossless compression</strong>. When you compress an image to 20KB or 50KB, we ensure that the text remains readable and the face remains clear. This is crucial for identity verification during exam processes.</p>
+            <div class="grid-info">
+                <div>
+                    <h3>Why Compress Photos?</h3>
+                    <p>Most government portals (like UPSC, SSC, Banking) require images under 20KB or 50KB. Uploading a high-resolution 5MB photo is impossible. Our tool intelligently shrinks the data footprint of your JPG or PNG files while preserving the details of your face and signature.</p>
+                </div>
+                <div>
+                    <h3>How it Works?</h3>
+                    <p>When you upload a file, our AI analyzes the pixels. It identifies areas where data can be optimized without human eyes noticing a difference. You can specify the exact KB size you need, and our system will recalculate the quality to match your target perfectly.</p>
+                </div>
+            </div>
+
+            <h3>Key Features of Photo Tools Pro:</h3>
+            <ul>
+                <li><strong>Batch Conversion:</strong> Convert multiple images to PDF in one go.</li>
+                <li><strong>Passport Ready:</strong> Automatically adjust dimensions to 3.5cm x 4.5cm for official Indian ID standards.</li>
+                <li><strong>Instant Background Removal:</strong> Our AI removes backgrounds with 99% accuracy for professional profile pictures.</li>
+                <li><strong>Privacy First:</strong> We do not store your images. All files are processed and then permanently deleted from our server cache.</li>
+            </ul>
+
+            <h2>Step-by-Step Guide to Use Photo Tools Pro</h2>
+            <ol>
+                <li><strong>Upload:</strong> Click on the upload box and select the image from your PC or Mobile.</li>
+                <li><strong>Select Tool:</strong> Choose whether you want to compress, resize, or remove the background.</li>
+                <li><strong>Set Parameters:</strong> If you are compressing, enter the target size (e.g., 50KB).</li>
+                <li><strong>Download:</strong> Once processed, click the download button to get your optimized file instantly.</li>
+            </ol>
+
+            <div style="background:#eff6ff; padding:20px; border-radius:10px; margin-top:30px;">
+                <h3 style="margin-top:0;">Our Social Mission</h3>
+                <p>Photo Tools Pro is built by an independent developer in <strong>Aurangabad, Bihar</strong>. We believe in giving back to society. <strong>50% of the revenue</strong> generated through ads on this site goes directly towards the education of underprivileged children and supporting street animal welfare organizations.</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>Frequently Asked Questions</h2>
+            <h3>Is this service really free?</h3>
+            <p>Yes! Every tool on Photo Tools Pro is free to use. We maintain the servers through minimal advertisements, allowing us to keep the service accessible for students across India.</p>
             
-            <h3 style="margin-top:20px;">AI-Powered Background Removal</h3>
-            <p>Using advanced neural networks, our <strong>background remover</strong> can separate subjects from complex backgrounds instantly. This tool is 100% free and works directly in your browser, keeping your data private and secure.</p>
-        </div>
-
-        <div class="faq-section">
-            <h2 style="text-align: center; color: #1e293b; margin-bottom: 30px;">Frequently Asked Questions (FAQ)</h2>
-            <div class="faq-item">
-                <h4>Is Photo Tools Pro free to use?</h4>
-                <p>Yes, all our tools including the Image Compressor and PDF Converter are 100% free with no hidden charges or registration required.</p>
-            </div>
-            <div class="faq-item">
-                <h4>Are my uploaded photos safe?</h4>
-                <p>Absolutely. We follow a strict privacy policy. Your images are processed on our secure servers and are automatically deleted after processing.</p>
-            </div>
-            <div class="faq-item">
-                <h4>How do I compress a photo to exactly 50KB?</h4>
-                <p>Simply select the 'Image Compressor' tool, upload your file, enter '50' in the Target Size box, and click Process. The tool will handle the rest.</p>
-            </div>
-            <div class="faq-item">
-                <h4>Can I use this on my mobile phone?</h4>
-                <p>Yes, Photo Tools Pro is fully responsive and works perfectly on all Android and iOS devices through any mobile browser.</p>
-            </div>
-        </div>
-
-        <div class="middle-ad" style="margin: 30px 0;">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9182040370007762" data-ad-slot="6517689966" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
-        <div class="footer" style="padding: 20px; border-top: 1px solid #ddd; margin-top: 40px; text-align: center;">
-            <p>© 2026 <strong>Photo Tools Pro</strong> | Hand-crafted with ❤️ in Aurangabad, Bihar</p>
-            <p style="font-size: 0.8rem; color: #94a3b8;">Supporting Student Education and Animal Welfare.</p>
+            <h3>What is the best format for online forms?</h3>
+            <p>Most portals prefer <strong>JPG/JPEG</strong> for photos and signatures. For documents like certificates, <strong>PDF</strong> is the recommended format. Our tool supports all these conversions.</p>
+            
+            <h3>Will my photo lose quality?</h3>
+            <p>Our "Smart Compression" technology ensures the highest possible quality for your target size. While some data is removed to reduce KB, the visual integrity remains sharp enough for official use.</p>
         </div>
     </div>
+
+    <footer style="text-align:center; padding:40px; color:#6b7280; font-size:0.9rem; border-top:1px solid #e5e7eb; background:white;">
+        <p>© 2026 Photo Tools Pro | Hand-crafted for Students & Professionals</p>
+        <p>Made with ❤️ in Bihar, India</p>
+    </footer>
 
     <script>
         function toggleFields() {
             let tool = document.getElementById("toolSelect").value;
-            let desc = document.getElementById("toolDescription");
-            
-            let singleImageBox = document.getElementById("singleImageBox");
-            let multiImageBox = document.getElementById("multiImageBox");
-            let targetSizeBox = document.getElementById("targetSizeBox");
-            let widthBox = document.getElementById("widthBox");
-            let heightBox = document.getElementById("heightBox");
-            let formatBox = document.getElementById("formatBox");
-
-            // Reset
-            singleImageBox.style.display = "block";
-            multiImageBox.style.display = "none";
-            targetSizeBox.style.display = "none";
-            widthBox.style.display = "none";
-            heightBox.style.display = "none";
-            formatBox.style.display = "block";
-
+            let targetBox = document.getElementById("targetSizeBox");
             if (tool === "compress") {
-                desc.innerText = "Compress images to a specific KB size for online exam forms.";
-                targetSizeBox.style.display = "block";
-                widthBox.style.display = "block";
-                heightBox.style.display = "block";
-            } else if (tool === "pdf") {
-                desc.innerText = "Combine multiple JPG/PNG images into a single high-quality PDF.";
-                singleImageBox.style.display = "none";
-                multiImageBox.style.display = "block";
-                formatBox.style.display = "none";
-            } else if (tool === "bgremove") {
-                desc.innerText = "Remove background instantly using AI technology.";
-                formatBox.style.display = "none";
-            } else if (tool === "passport") {
-                desc.innerText = "Convert any photo into 3.5cm x 4.5cm passport size automatically.";
+                targetBox.style.display = "block";
             } else {
-                desc.innerText = "Professional quality image processing tool.";
+                targetBox.style.display = "none";
             }
         }
         window.onload = toggleFields;
