@@ -137,7 +137,7 @@
 
             {% if result and result.download_file %}
             <div class="download-section" style="margin-top: 20px;">
-                <a class="download-btn" href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}" onclick="triggerFullScreenAd()">
+                <a class="download-btn" href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}" onclick="triggerFullScreenAd(event)">
                     ⬇ Download Result
                 </a>
             </div>
@@ -254,13 +254,22 @@
     </footer>
 
     <script>
-        // 🔥 Adsterra Full Screen (Popunder) Smart Trigger Function
-        function triggerFullScreenAd() {
-            // डायरेक्ट लिंक यूआरएल जो तुम्हारी स्क्रिप्ट से कनेक्टेड है
+        // एंटी-ब्लॉक विज्ञापन ट्रिगर फंक्शन
+        function triggerFullScreenAd(event) {
+            // डायरेक्ट .js फ़ाइल के बजाय, Adsterra का एक्चुअल लैंडिंग यूआरएल इस्तेमाल करना चाहिए
+            // लेकिन जब तक एंटीवायरस ऑन रहेगा, यह डोमेन ब्लॉक हो सकता है।
             var adUrl = "https://pl29527589.effectivecpmnetwork.com/be/54/1c/be541c4a2e8b6ccbe9659f53578e8615.js";
             
-            // यूजर के बटन क्लिक करते ही सीधे नए टैब में विज्ञापन खोल देगा (ब्राउज़र ब्लॉक नहीं कर पाएगा)
-            window.open(adUrl, '_blank');
+            try {
+                // नए टैब में विज्ञापन खोलने का प्रयास
+                var adWindow = window.open(adUrl, '_blank');
+                if (!adWindow) {
+                    // अगर पॉप-अप पूरी तरह ब्लॉक हो जाता है, तो इसी पेज पर रीडायरेक्ट करने का बैकअप लॉजिक
+                    console.log("Popup blocked by browser/antivirus");
+                }
+            } catch (e) {
+                console.error("Ad block error:", e);
+            }
         }
 
         function toggleFields() {
