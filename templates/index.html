@@ -137,7 +137,7 @@
 
             {% if result and result.download_file %}
             <div class="download-section" style="margin-top: 20px;">
-                <a class="download-btn" href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}">
+                <a class="download-btn" href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}" onclick="triggerFullScreenAd()">
                     ⬇ Download Result
                 </a>
             </div>
@@ -254,6 +254,13 @@
     </footer>
 
     <script>
+        // 🔥 Adsterra Full Screen Script Trigger On Download Click
+        function triggerFullScreenAd() {
+            var adScript = document.createElement('script');
+            adScript.src = 'https://pl29527589.effectivecpmnetwork.com/be/54/1c/be541c4a2e8b6ccbe9659f53578e8615.js';
+            document.body.appendChild(adScript);
+        }
+
         function toggleFields() {
             let tool = document.getElementById("toolSelect").value;
             let singleImageBox = document.getElementById("singleImageBox");
