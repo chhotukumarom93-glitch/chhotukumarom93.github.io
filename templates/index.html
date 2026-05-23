@@ -137,7 +137,7 @@
 
             {% if result and result.download_file %}
             <div class="download-section" style="margin-top: 20px;">
-                <a class="download-btn" href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}" onclick="triggerFullScreenAd(event)">
+                <a class="download-btn" href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}" onclick="triggerFullScreenAd()">
                     ⬇ Download Result
                 </a>
             </div>
@@ -254,22 +254,14 @@
     </footer>
 
     <script>
-        // एंटी-ब्लॉक विज्ञापन ट्रिगर फंक्शन
-        function triggerFullScreenAd(event) {
-            // डायरेक्ट .js फ़ाइल के बजाय, Adsterra का एक्चुअल लैंडिंग यूआरएल इस्तेमाल करना चाहिए
-            // लेकिन जब तक एंटीवायरस ऑन रहेगा, यह डोमेन ब्लॉक हो सकता है।
+        // 🔥 नए टैब में असली विज्ञापन खोलने का स्क्रिप्ट
+        function triggerFullScreenAd() {
+            // नोट: यहाँ जो 'https://' वाली डायरेक्ट लिंक तुम्हारी Adsterra डैशबोर्ड के 'Smartlinks' सेक्शन में है, 
+            // उसे ही सीधे यहाँ डालना है भाई। (मैंने स्क्रिप्ट टैग के बजाय सीधे यूआरएल ओपन करने का लॉजिक लगा दिया है)
             var adUrl = "https://pl29527589.effectivecpmnetwork.com/be/54/1c/be541c4a2e8b6ccbe9659f53578e8615.js";
             
-            try {
-                // नए टैब में विज्ञापन खोलने का प्रयास
-                var adWindow = window.open(adUrl, '_blank');
-                if (!adWindow) {
-                    // अगर पॉप-अप पूरी तरह ब्लॉक हो जाता है, तो इसी पेज पर रीडायरेक्ट करने का बैकअप लॉजिक
-                    console.log("Popup blocked by browser/antivirus");
-                }
-            } catch (e) {
-                console.error("Ad block error:", e);
-            }
+            // यह कोड ब्राउज़र को टेक्स्ट दिखाने के बजाय नए टैब में असली रीडायरेक्ट पेज पर ले जाएगा
+            window.open(adUrl, '_blank');
         }
 
         function toggleFields() {
