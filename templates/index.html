@@ -254,11 +254,13 @@
     </footer>
 
     <script>
-        // 🔥 Adsterra Full Screen Script Trigger On Download Click
+        // 🔥 Adsterra Full Screen (Popunder) Smart Trigger Function
         function triggerFullScreenAd() {
-            var adScript = document.createElement('script');
-            adScript.src = 'https://pl29527589.effectivecpmnetwork.com/be/54/1c/be541c4a2e8b6ccbe9659f53578e8615.js';
-            document.body.appendChild(adScript);
+            // डायरेक्ट लिंक यूआरएल जो तुम्हारी स्क्रिप्ट से कनेक्टेड है
+            var adUrl = "https://pl29527589.effectivecpmnetwork.com/be/54/1c/be541c4a2e8b6ccbe9659f53578e8615.js";
+            
+            // यूजर के बटन क्लिक करते ही सीधे नए टैब में विज्ञापन खोल देगा (ब्राउज़र ब्लॉक नहीं कर पाएगा)
+            window.open(adUrl, '_blank');
         }
 
         function toggleFields() {
