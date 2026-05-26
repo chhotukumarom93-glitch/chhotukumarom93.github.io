@@ -105,7 +105,7 @@ def resize_exact(img, width, height):
     return img.resize((width, height))
 
 # -----------------------------
-# SEO / ADS ROUTES
+# SEO / ADS ROUTES (🚀 गोलू अपडेटेड)
 # -----------------------------
 @app.route("/robots.txt")
 def robots():
@@ -115,40 +115,40 @@ Allow: /
 Sitemap: https://phototoolspro.co.in/sitemap.xml
 """
     return Response(robots_txt, mimetype="text/plain")
+
 @app.route("/sitemap.xml")
 def sitemap():
+    # यहाँ एरर वाली लाइन को बिल्कुल शुद्ध xml कोड से बदल दिया है
     sitemap_xml = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-<url>
-<loc>https://phototoolspro.co.in/</loc>
-</url>
-
-</url>  <url>  <loc>https://phototoolspro.co.in/compress-images/loc>
-
-<url>
-<loc>https://phototoolspro.co.in/about</loc>
-</url>
-
-<url>
-<loc>https://phototoolspro.co.in/contact</loc>
-</url>
-
-<url>
-<loc>https://phototoolspro.co.in/privacy</loc>
-</url>
-
-</urlset>
-"""
+    <url>
+        <loc>https://phototoolspro.co.in/</loc>
+    </url>
+    <url>
+        <loc>https://phototoolspro.co.in/compress-image</loc>
+    </url>
+    <url>
+        <loc>https://phototoolspro.co.in/about</loc>
+    </url>
+    <url>
+        <loc>https://phototoolspro.co.in/contact</loc>
+    </url>
+    <url>
+        <loc>https://phototoolspro.co.in/privacy</loc>
+    </url>
+</urlset>"""
     return Response(sitemap_xml, mimetype="application/xml")
+
 @app.route("/ads.txt")
 def ads():
     ads_txt = "google.com, pub-9182040370007762, DIRECT, f08c47fec0942fa0"
     return Response(ads_txt, mimetype="text/plain")
+
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
 # -----------------------------
 # ROUTES
 # -----------------------------
@@ -401,9 +401,6 @@ def home():
 
 # -----------------------------
 # OTHER ROUTES
-# -----------------------------
-# -----------------------------
-# NEW SEO ROUTES (YAH ADD KARO)
 # -----------------------------
 @app.route("/tool")
 def tool_page():
