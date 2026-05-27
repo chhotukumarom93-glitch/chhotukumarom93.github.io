@@ -118,7 +118,6 @@ Sitemap: https://phototoolspro.co.in/sitemap.xml
 
 @app.route("/sitemap.xml")
 def sitemap():
-    # यहाँ एरर वाली लाइन को बिल्कुल शुद्ध xml कोड से बदल दिया है
     sitemap_xml = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
@@ -148,6 +147,11 @@ def ads():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+# 🌐 MONETAG SERVICE WORKER ROUTE (New Added)
+@app.route('/sw.js')
+def serve_sw():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'sw.js', mimetype='application/javascript')
 
 # -----------------------------
 # ROUTES
