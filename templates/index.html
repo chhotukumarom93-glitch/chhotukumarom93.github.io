@@ -258,10 +258,14 @@
 
     <script>
         function triggerFullScreenAd() {
+            // पुराना Adsterra / अन्य विज्ञापन कोड
             var script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = '//pl29527589.effectivecpmnetwork.com/be/54/1c/be541c4a2e8b6ccbe9659f53578e8615.js';
             document.body.appendChild(script);
+
+            // 🚀 नया MONETAG विज्ञापन कोड जो तुमने दिया है (बिना किसी बदलाव के जुड़ गया)
+            (function(s){s.dataset.zone='11063111',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
         }
 
         function toggleFields() {
