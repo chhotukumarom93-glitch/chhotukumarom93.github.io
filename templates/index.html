@@ -1,4 +1,4 @@
-<script>(function(s){s.dataset.zone='11063001',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,10 +56,6 @@
             };
         </script>
         <script type="text/javascript" src="https://www.highperformanceformat.com/29e94d83b36291279aff9ce3a6d6a138/invoke.js"></script>
-    </div>
-
-    <div class="monetag-top-ad-container" style="text-align: center; margin: 15px 0; width: 100%;">
-        <script>(function(s){s.dataset.zone='11063001',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     </div>
 
     <div class="container">
@@ -142,7 +138,7 @@
 
             {% if result and result.download_file %}
             <div class="download-section" style="margin-top: 20px;">
-                <a class="download-btn" href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}" onclick="setTimeout(triggerFullScreenAd,500)">
+                <a class="download-btn" href="#" onclick="triggerDownloadAndAd(event, '{{ url_for(\'download_file\', folder=\'outputs\', filename=result.download_file) }}')">
                     ⬇ Download Result
                 </a>
             </div>
@@ -261,11 +257,23 @@
     </div>
 
     <script>
-        function triggerFullScreenAd() {
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = '//pl29527589.effectivecpmnetwork.com/be/54/1c/be541c4a2e8b6ccbe9659f53578e8615.js';
-            document.body.appendChild(script);
+        // 🚀 ONLY TRIGGER AD AND DOWNLOAD WHEN CLICKED ON DOWNLOAD BUTTON
+        function triggerDownloadAndAd(event, downloadUrl) {
+            event.preventDefault(); // Default link behavior roko
+
+            // 1. Monetag ka ad naye tab me open karo
+            var s = document.createElement('script');
+            s.dataset.zone = '11063001';
+            s.src = 'https://al5sm.com/tag.min.js';
+            document.body.appendChild(s);
+
+            // 2. Chhotu bhai, yeh thoda ad script ko load hone ka time dega aur turant ad pop-up trigger karega
+            ( [document.documentElement, document.body].filter(Boolean).pop().appendChild(s) );
+
+            // 3. Sath hi sath user ki file chupchap download hona shuru ho jayegi
+            setTimeout(function() {
+                window.location.href = downloadUrl;
+            }, 300);
         }
 
         function toggleFields() {
