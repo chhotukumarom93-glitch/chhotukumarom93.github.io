@@ -148,10 +148,13 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
-# 🌐 MONETAG SERVICE WORKER ROUTE (New Added)
+# 🌐 MONETAG SERVICE WORKER ROUTE (Updated & Safe 🚀)
 @app.route('/sw.js')
 def serve_sw():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'sw.js', mimetype='application/javascript')
+    static_folder = os.path.join(app.root_path, 'static')
+    if not os.path.exists(os.path.join(static_folder, 'sw.js')):
+        return "Service Worker File Missing in Static Folder", 404
+    return send_from_directory(static_folder, 'sw.js', mimetype='application/javascript')
 
 # -----------------------------
 # ROUTES
