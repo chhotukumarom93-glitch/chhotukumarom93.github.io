@@ -11,6 +11,10 @@
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#2563eb">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <meta property="og:title" content="Photo Tools Pro">
     <meta property="og:description" content="Compress Image, Remove Background, Passport Photo, Signature Resize, PDF Tool and more.">
     <meta property="og:type" content="website">
@@ -32,15 +36,65 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" sizes="16x16 32x32 48x48">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17912999909"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'AW-17912999909');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17912999909"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-17912999909');
+    </script>
+
+    <style>
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 35px;
+        }
+        .tool-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 18px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            background: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1);
+        }
+        .tool-card.active {
+            background: #ffffff;
+            border: 2px solid #2563eb;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.15);
+        }
+        .tool-card .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        .tool-card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .form-section-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+    </style>
 </head>
 <body>
 
@@ -54,7 +108,7 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
-    <div class="adsterra-top-ad-container" style="text-align: center; margin: 15px 0; width: 100%;">
+    <div class="adsterra-top-ad-container">
         <script type="text/javascript">
             atOptions = {
                 'key' : '29e94d83b36291279aff9ce3a6d6a138',
@@ -71,12 +125,12 @@
         <div class="header">
             <div class="brand-badge">TRUSTED ONLINE PHOTO TOOL</div>
             <h1>📸 Photo Tools Pro</h1>
-            <p>Compress • Passport • Signature • PDF • BG Remove • Thumbnail</p>
+            <p>Premium Suite for High-Speed Digital Image Processing</p>
             <p class="mini-tagline">Fast • Clean • Free • Professional Quality</p>
         </div>
 
         <div class="visitor-box">
-            <p>👁 Unique Visitors: {{ visitor_count }}</p>
+            <span>Unique Visitors: {{ visitor_count }}</span>
         </div>
 
         <div class="trust-strip">
@@ -86,19 +140,54 @@
             <span>🛠 Professional Tools</span>
         </div>
 
-        <div class="card">
+        <div class="tools-grid">
+            <div class="tool-card active" onclick="selectToolCard('compress')">
+                <span class="icon">🗜️</span>
+                <h3>Image Compressor</h3>
+            </div>
+            <div class="tool-card" onclick="selectToolCard('passport')">
+                <span class="icon">🪪</span>
+                <h3>Passport Maker</h3>
+            </div>
+            <div class="tool-card" onclick="selectToolCard('signature')">
+                <span class="icon">✍️</span>
+                <h3>Signature Resize</h3>
+            </div>
+            <div class="tool-card" onclick="selectToolCard('formphoto')">
+                <span class="icon">🖼️</span>
+                <h3>Form Photo Resize</h3>
+            </div>
+            <div class="tool-card" onclick="selectToolCard('bgremove')">
+                <span class="icon">✂️</span>
+                <h3>BG Remover</h3>
+            </div>
+            <div class="tool-card" onclick="selectToolCard('pdf')">
+                <span class="icon">📄</span>
+                <h3>Image to PDF</h3>
+            </div>
+            <div class="tool-card" onclick="selectToolCard('thumbnail')">
+                <span class="icon">🎨</span>
+                <h3>Thumbnail Tool</h3>
+            </div>
+        </div>
+
+        <div class="card" id="processingWorkspace">
+            
+            <div class="form-section-title">
+                <span id="selectedToolTitleName">⚙️ Image Workspace</span>
+            </div>
+
             {% if result %}
                 {% if result.success %}
-                    <div class="success-box">{{ result.success }}</div>
+                    <div class="success-box">✅ {{ result.success }}</div>
                 {% endif %}
                 {% if result.error %}
-                    <div class="error-box">{{ result.error }}</div>
+                    <div class="error-box">❌ {{ result.error }}</div>
                 {% endif %}
             {% endif %}
 
-            <form method="POST" enctype="multipart/form-data">
-                <label for="toolSelect">Select Tool</label>
-                <select name="tool" id="toolSelect" onchange="toggleFields()">
+            <form method="POST" enctype="multipart/form-data" id="mainToolForm">
+                <select name="tool" id="toolSelect" onchange="toggleFields()" style="display: none;">
                     <option value="compress">Image Compressor</option>
                     <option value="passport">Passport Photo Maker</option>
                     <option value="signature">Signature Resize</option>
@@ -109,64 +198,63 @@
                 </select>
 
                 <div id="singleImageBox">
-                    <label>Upload Image</label>
+                    <label>📁 Upload Your Image</label>
                     <input type="file" name="image" accept="image/*">
                 </div>
 
                 <div id="multiImageBox" style="display:none;">
-                    <label>Upload Multiple Images (for PDF)</label>
+                    <label>📂 Upload Multiple Images (for PDF)</label>
                     <input type="file" name="images" multiple accept="image/*">
                 </div>
 
                 <div id="targetSizeBox">
-                    <label>Target Size (KB)</label>
-                    <input type="number" name="target_kb" placeholder="e.g. 100">
+                    <label>🎯 Target Size (Optional KB)</label>
+                    <input type="number" name="target_kb" placeholder="e.g. 50 or 100">
                 </div>
 
                 <div id="widthBox" style="display:none;">
-                    <label>Width (optional)</label>
+                    <label>📐 Custom Width (px)</label>
                     <input type="number" name="width" placeholder="e.g. 800">
                 </div>
 
                 <div id="heightBox" style="display:none;">
-                    <label>Height (optional)</label>
+                    <label>📐 Custom Height (px)</label>
                     <input type="number" name="height" placeholder="e.g. 600">
                 </div>
 
                 <div id="formatBox">
-                    <label>Output Format</label>
+                    <label>💿 Choose Output Format</label>
                     <select name="format">
-                        <option value="JPG">JPG</option>
-                        <option value="PNG">PNG</option>
-                        <option value="WEBP">WEBP</option>
+                        <option value="JPG">Convert to JPG</option>
+                        <option value="PNG">Convert to PNG</option>
+                        <option value="WEBP">Convert to WEBP</option>
                     </select>
                 </div>
 
-                <button type="submit">🚀 Process Now</button>
+                <button type="submit">🚀 Process File Instantly</button>
             </form>
 
             {% if result and result.download_file %}
-            <div class="download-section" style="margin-top: 20px;">
+            <div class="download-section">
                 <a class="download-btn" href="{{ url_for('download_file', folder='outputs', filename=result.download_file) }}" onclick="setTimeout(triggerFullScreenAd,500)">
-                    ⬇ Download Result
+                    📥 Download Processed Result
                 </a>
             </div>
             {% endif %}
 
             {% if result and result.preview_file %}
-            <div class="preview-section" style="margin-top: 20px; text-align: center;">
-                <p style="font-weight: bold; color: #666; font-size: 0.9rem;">Preview</p>
+            <div class="preview-section">
+                <h3>✨ Live File Preview</h3>
                 <div style="display: flex; justify-content: center;">
                     <img class="preview-img" 
                          src="{{ url_for('static', filename=result.preview_folder + '/' + result.preview_file) }}" 
-                         alt="Preview" 
-                         style="max-width: 250px; height: auto; border-radius: 8px; border: 2px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                         alt="Preview">
                 </div>
             </div>
             {% endif %}
         </div>
 
-        <div class="article-section" style="margin-top: 40px; text-align: left; background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); color: #334155; line-height: 1.8;">
+        <div class="article-section">
             <h2 style="color: #2563eb; font-size: 1.8rem; margin-bottom: 20px; border-bottom: 3px solid #f1f5f9; padding-bottom: 10px;">Photo Tools Pro: Best Online Image Editor & PDF Utility</h2>
             
             <p>Welcome to <strong>Photo Tools Pro</strong>, your one-stop solution for all digital image processing needs. Whether you are a student preparing for government exams (UPSC, SSC, Railway, Banking) or a professional photographer, our platform offers high-speed, secure, and precise tools to manage your documents easily.</p>
@@ -185,7 +273,7 @@
 
             <div style="background: #eff6ff; padding: 20px; border-radius: 8px; margin-top: 30px; border-left: 5px solid #2563eb;">
                 <h4 style="margin-top: 0; color: #1e3a8a;">Why Choose Photo Tools Pro?</h4>
-                <ul style="margin-bottom: 0;">
+                <ul style="margin-bottom: 0; padding-left: 20px;">
                     <li><strong>No Registration Required:</strong> Use all tools for free without creating an account.</li>
                     <li><strong>Ultra-Fast Speed:</strong> Process high-resolution images in milliseconds.</li>
                     <li><strong>Device Friendly:</strong> Works perfectly on Android, iPhone, and PC browsers.</li>
@@ -194,7 +282,7 @@
             </div>
         </div>
 
-        <div class="pro-footer-info" style="margin-top: 50px; padding: 30px 10px; border-top: 1px solid #eee; text-align: left;">
+        <div class="pro-footer-info">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
                 
                 <div>
@@ -228,7 +316,7 @@
             </div>
         </div>
 
-        <div class="middle-ad" style="margin-top: 30px;">
+        <div class="middle-ad">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-9182040370007762"
@@ -238,7 +326,7 @@
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
-        <div class="adsterra-middle-ad-container" style="text-align: center; margin: 20px 0; width: 100%;">
+        <div class="adsterra-middle-ad-container">
             <script type="text/javascript">
                 atOptions = {
                     'key' : 'ed8bef322cd11ad4381a7c11f8424ace',
@@ -266,15 +354,34 @@
     </div>
 
     <script>
+        // 🚀 Monetag & Adsterra Fullscreen Trigger
         function triggerFullScreenAd() {
-            // पुराना Adsterra / अन्य विज्ञापन कोड
             var script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = '//pl29527589.effectivecpmnetwork.com/be/54/1c/be541c4a2e8b6ccbe9659f53578e8615.js';
             document.body.appendChild(script);
 
-            // 🚀 नया MONETAG विज्ञापन कोड जो तुमने दिया है (बिना किसी बदलाव के जुड़ गया)
             (function(s){s.dataset.zone='11063111',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
+        }
+
+        // 🎛️ Dynamic Grid UI Connector
+        function selectToolCard(toolValue) {
+            // Remove active status from all cards
+            let cards = document.querySelectorAll('.tool-card');
+            cards.forEach(card => card.classList.remove('active'));
+            
+            // Find click card and set active
+            event.currentTarget.classList.add('active');
+            
+            // Synchronize hidden select field value
+            let selectElement = document.getElementById("toolSelect");
+            selectElement.value = toolValue;
+            
+            // Trigger core content fields change
+            toggleFields();
+
+            // Smooth scroll down straight to the Workspace Form for premium feel
+            document.getElementById("processingWorkspace").scrollIntoView({ behavior: 'smooth' });
         }
 
         function toggleFields() {
@@ -285,7 +392,9 @@
             let widthBox = document.getElementById("widthBox");
             let heightBox = document.getElementById("heightBox");
             let formatBox = document.getElementById("formatBox");
+            let titleDisplay = document.getElementById("selectedToolTitleName");
 
+            // Reset Default Visibility Layout
             singleImageBox.style.display = "block";
             multiImageBox.style.display = "none";
             targetSizeBox.style.display = "none";
@@ -293,21 +402,45 @@
             heightBox.style.display = "none";
             formatBox.style.display = "block";
 
+            // Update Dynamic Headline Text based on selection
             if (tool === "compress") {
+                titleDisplay.innerText = "🗜️ Image Compressor Workspace";
                 targetSizeBox.style.display = "block";
                 widthBox.style.display = "block";
                 heightBox.style.display = "block";
-            }
-            if (tool === "pdf") {
+            } else if (tool === "passport") {
+                titleDisplay.innerText = "🪪 Passport Photo Maker Workspace";
+            } else if (tool === "signature") {
+                titleDisplay.innerText = "✍️ Signature Resize Workspace";
+            } else if (tool === "formphoto") {
+                titleDisplay.innerText = "🖼️ Form Photo Resize Workspace";
+            } else if (tool === "bgremove") {
+                titleDisplay.innerText = "✂️ AI Background Remover Workspace";
+                formatBox.style.display = "none";
+            } else if (tool === "pdf") {
+                titleDisplay.innerText = "📄 Image to PDF Converter Workspace";
                 singleImageBox.style.display = "none";
                 multiImageBox.style.display = "block";
                 formatBox.style.display = "none";
-            }
-            if (tool === "bgremove") {
-                formatBox.style.display = "none";
+            } else if (tool === "thumbnail") {
+                titleDisplay.innerText = "🎨 YouTube Thumbnail Tool Workspace";
             }
         }
-        window.onload = toggleFields;
+
+        // Handle page reload or state retention checks gracefully
+        window.onload = function() {
+            let currentSavedValue = document.getElementById("toolSelect").value;
+            // Highlight right matching card grid icon on boot load
+            let cards = document.querySelectorAll('.tool-card');
+            cards.forEach(card => {
+                let onClickAttr = card.getAttribute('onclick');
+                if(onClickAttr && onClickAttr.includes(currentSavedValue)) {
+                    cards.forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                }
+            });
+            toggleFields();
+        };
     </script>
 </body>
 </html>
