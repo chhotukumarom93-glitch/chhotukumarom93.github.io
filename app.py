@@ -109,11 +109,7 @@ def resize_exact(img, width, height):
 # -----------------------------
 @app.route("/robots.txt")
 def robots():
-    robots_txt = """User-agent: *
-Allow: /
-
-Sitemap: https://phototoolspro.co.in/sitemap.xml
-"""
+    robots_txt = "User-agent: *\nAllow: /\n\nSitemap: https://phototoolspro.co.in/sitemap.xml"
     return Response(robots_txt, mimetype="text/plain")
 
 @app.route("/sitemap.xml")
@@ -148,7 +144,7 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
-# 🌐 MONETAG SERVICE WORKER ROUTE (Updated & Safe 🚀)
+# 🌐 MONETAG SERVICE WORKER ROUTE
 @app.route('/sw.js')
 def serve_sw():
     static_folder = os.path.join(app.root_path, 'static')
@@ -360,8 +356,6 @@ def home():
             elif tool == "bgremove":
                 try:
                     input_image = Image.open(upload_path).convert("RGBA")
-
-                    # Render free ke liye image halka karo
                     input_image.thumbnail((1000, 1000))
 
                     output_image = remove(input_image)
@@ -435,6 +429,17 @@ def contact():
         message = request.form.get("message")
 
         if name and email and message:
+            # 🚀 डेटाबेस में भी कांटेक्ट मैसेज को सुरक्षित सेव करना (गोलू अपडेट)
+            try:
+                conn = sqlite3.connect(DB_FILE)
+                cursor = conn.cursor()
+                cursor.execute("INSERT INTO messages (name, email, message) VALUES (?, ?, ?)", (name, email, message))
+                conn.commit()
+                conn.close()
+            except Exception as e:
+                print(f"Database error: {e}")
+
+            # पुरानी फाइल राइटिंग भी चालू रखी है बैकअप के लिए
             with open("messages.txt", "a", encoding="utf-8") as f:
                 f.write("===== New Message =====\n")
                 f.write(f"Name: {name}\n")
