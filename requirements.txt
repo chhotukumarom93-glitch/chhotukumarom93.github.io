@@ -1,8 +1,8 @@
-__pycache__/
-*.pyc
-uploads/
-static/outputs/
-static/previews/
-site_data.db
-.env
-firebase_creds.json
+Flask
+Pillow
+Werkzeug
+rembg
+fpdf2
+gunicorn
+onnxruntime
+firebase-admin==6.5.0
