@@ -5,3 +5,4 @@ static/outputs/
 static/previews/
 site_data.db
 .env
+firebase_creds.json
